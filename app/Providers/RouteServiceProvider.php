@@ -16,8 +16,14 @@ class RouteServiceProvider extends ServiceProvider
      * This is used by Laravel authentication to redirect users after login.
      *
      * @var string
+     *
      */
-    public const HOME = '/home';
+    
+     // public const HOME = '/home';
+     public const HOME = '/';
+     public const ADMIN = '/admin';
+ 
+
 
     /**
      * The controller namespace for the application.
@@ -35,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -46,6 +53,19 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            Route::middleware('web')
+            ->namespace($this->namespace)
+            ->prefix('admin')
+            ->group(base_path('routes/admin.php'));
+            
+            Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/site.php'));
+
+
+
+
         });
     }
 
