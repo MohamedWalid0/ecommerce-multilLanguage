@@ -158,13 +158,13 @@
                     <li><a class="menu-item" href="#"
                            data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.shipping methods')}} </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href=   "" 
+                            <li><a class="menu-item" href= "{{ route('edit.shippings.methods' ,'free') }}" 
                                                         data-i18n="nav.templates.vert.classic_menu">توصيل مجاني </a>
                             </li>
-                            <li><a class="menu-item" href=""> توصيل
+                            <li><a class="menu-item" href="{{ route('edit.shippings.methods' ,'inner') }}"> توصيل
                                     داخلي </a>
                             </li>
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{ route('edit.shippings.methods' ,'outer') }}"
                                    data-i18n="nav.templates.vert.compact_menu"> توصيل خارجي </a>
                             </li>
                         </ul>
