@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\LoginController;
+use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -37,6 +38,13 @@ Route::group([
         
             } ) ;
         
+
+            Route::group(['prefix' => 'profile'], function () {
+                Route::get('edit', [ProfileController::class , 'editProfile'])->name('profile.edit');
+                Route::put('update', [ProfileController::class , 'updateProfile'])->name('profile.update');
+            });
+
+
         
         } ) ;
         
