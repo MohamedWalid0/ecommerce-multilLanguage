@@ -1,6 +1,6 @@
 <?php
 
-// define('PAGINATION_COUNT', 10);
+define('PAGINATION_COUNT', 10);
 
 function getFolder()
 {
@@ -8,8 +8,10 @@ function getFolder()
 }
 
 
-// function uploadImage($folder,$image){
-//     $image->store('/', $folder);
-//     $filename = $image->hashName();
-//     return  $filename;
-//  }
+function uploadImage($folder,$image){
+
+    $image->store('/', $folder);
+    $filename = $image->hashName();
+    return  $filename;
+
+}
