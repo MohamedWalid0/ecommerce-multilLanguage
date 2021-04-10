@@ -11,6 +11,7 @@ class Category extends Model
     use HasFactory;
     use Translatable ;
 
+    protected $table = 'categories' ;
 
     protected $with = ['translations'];
 

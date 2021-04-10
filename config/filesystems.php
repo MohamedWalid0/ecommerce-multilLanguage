@@ -15,6 +15,7 @@ return [
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
+
     /*
     |--------------------------------------------------------------------------
     | Filesystem Disks
@@ -27,6 +28,10 @@ return [
     | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
     */
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+
+
+
 
     'disks' => [
 
@@ -41,6 +46,14 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+
+        'brands' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/images/brands/' ,
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
 
         's3' => [
             'driver' => 's3',
