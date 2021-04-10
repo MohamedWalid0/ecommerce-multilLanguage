@@ -74,10 +74,6 @@ class BrandsController extends Controller
     public function update($id, BrandRequest $request)
     {
         try {
-            //validation
-
-            //update DB
-
 
             $brand = Brand::find($id);
 

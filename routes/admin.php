@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\MainCategoriesController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SubCategoriesController;
+use App\Http\Controllers\Dashboard\TagsController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -81,7 +82,15 @@ Route::group([
                 Route::get('delete/{id}', [BrandsController::class , 'destroy'])->name('admin.brands.delete');
             });
             ################################## end brands    #######################################
-
+            Route::group(['prefix' => 'tags' ], function () {
+                Route::get('/', [TagsController::class , 'index'])->name('admin.tags');
+                Route::get('create', [TagsController::class , 'create'])->name('admin.tags.create');
+                Route::post('store', [TagsController::class , 'store'])->name('admin.tags.store');
+                Route::get('edit/{id}', [TagsController::class , 'edit'])->name('admin.tags.edit');
+                Route::post('update/{id}', [TagsController::class , 'update'])->name('admin.tags.update');
+                Route::get('delete/{id}', [TagsController::class , 'destroy'])->name('admin.tags.delete');
+            });
+    
 
 
         

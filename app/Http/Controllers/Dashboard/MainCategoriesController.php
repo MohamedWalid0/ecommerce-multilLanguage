@@ -25,8 +25,6 @@ class MainCategoriesController extends Controller
 
     public function store(MainCategoryRequest $request)
     {
-
-        // return "hello" ;
         try {
 
             DB::beginTransaction();
@@ -39,13 +37,13 @@ class MainCategoriesController extends Controller
                 $request->request->add(['is_active' => 1]);
 
             //if user choose main category then we must remove paret id from the request
+            // CategoryType::mainCategory
+            if($request -> type == 1) //main category
+            {
+                $request->request->add(['parent_id' => null]);
+            }
 
-            // if($request -> type == CategoryType::mainCategory) //main category
-            // {
-            //     $request->request->add(['parent_id' => null]);
-            // }
-
-            //if he choose child category we mus t add parent id
+            //if he choose child category we must add parent id
 
 
             $category = Category::create($request->except('_token'));
@@ -54,8 +52,8 @@ class MainCategoriesController extends Controller
             $category->name = $request->name;
             $category->save();
 
-            return redirect()->route('admin.maincategories')->with(['success' => 'تم ألاضافة بنجاح']);
             DB::commit();
+            return redirect()->route('admin.maincategories')->with(['success' => 'تم ألاضافة بنجاح']);
 
         } catch (\Exception $ex) {
             DB::rollback();
@@ -112,7 +110,7 @@ class MainCategoriesController extends Controller
 
         try {
             //get specific categories and its translations
-            $category = Category::orderBy('id', 'DESC')->find($id);
+            $category = Category::find($id);
 
             if (!$category)
                 return redirect()->route('admin.maincategories')->with(['error' => 'هذا القسم غير موجود ']);

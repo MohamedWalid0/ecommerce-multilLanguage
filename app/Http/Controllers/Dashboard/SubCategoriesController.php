@@ -41,8 +41,8 @@ class SubCategoriesController extends Controller
             $category->name = $request->name;
             $category->save();
 
-            return redirect()->route('admin.subcategories')->with(['success' => 'تم ألاضافة بنجاح']);
             DB::commit();
+            return redirect()->route('admin.subcategories')->with(['success' => 'تم ألاضافة بنجاح']);
 
         } catch (\Exception $ex) {
             DB::rollback();
@@ -101,7 +101,7 @@ class SubCategoriesController extends Controller
 
         try {
             //get specific categories and its translations
-            $category = Category::orderBy('id', 'DESC')->find($id);
+            $category = Category::find($id);
 
             if (!$category)
                 return redirect()->route('admin.subcategories')->with(['error' => 'هذا القسم غير موجود ']);
