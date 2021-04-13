@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AttributesController;
 use App\Http\Controllers\Dashboard\BrandsController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\LoginController;
 use App\Http\Controllers\Dashboard\MainCategoriesController;
+use App\Http\Controllers\Dashboard\OptionsController;
+use App\Http\Controllers\Dashboard\ProductsController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SubCategoriesController;
@@ -82,6 +85,8 @@ Route::group([
                 Route::get('delete/{id}', [BrandsController::class , 'destroy'])->name('admin.brands.delete');
             });
             ################################## end brands    #######################################
+            ################################## tags routes    #######################################
+
             Route::group(['prefix' => 'tags' ], function () {
                 Route::get('/', [TagsController::class , 'index'])->name('admin.tags');
                 Route::get('create', [TagsController::class , 'create'])->name('admin.tags.create');
@@ -90,7 +95,46 @@ Route::group([
                 Route::post('update/{id}', [TagsController::class , 'update'])->name('admin.tags.update');
                 Route::get('delete/{id}', [TagsController::class , 'destroy'])->name('admin.tags.delete');
             });
+            ################################## end tags    #######################################
     
+            ################################## products routes ######################################
+            Route::group(['prefix' => 'products'], function () {
+                Route::get('/', [ProductsController::class , 'index'])->name('admin.products');
+                Route::get('general-information', [ProductsController::class , 'create'])->name('admin.products.general.create');
+                Route::post('store-general-information', [ProductsController::class , 'store'])->name('admin.products.general.store');
+
+                Route::get('price/{id}', [ProductsController::class , 'getPrice'])->name('admin.products.price');
+                Route::post('price', [ProductsController::class , 'saveProductPrice'])->name('admin.products.price.store');
+
+                Route::get('stock/{id}', [ProductsController::class , 'getStock'])->name('admin.products.stock');
+                Route::post('stock', [ProductsController::class , 'saveProductStock'])->name('admin.products.stock.store');
+
+                Route::get('images/{id}', [ProductsController::class , 'addImages'])->name('admin.products.images');
+                Route::post('images', [ProductsController::class , 'saveProductImages'])->name('admin.products.images.store');
+                Route::post('images/db', [ProductsController::class , 'saveProductImagesDB'])->name('admin.products.images.store.db');
+            });
+            ################################## end products    #######################################
+            ################################## attrributes routes ######################################
+            Route::group(['prefix' => 'attributes'], function () {
+                Route::get('/', [AttributesController::class , 'index'])->name('admin.attributes');
+                Route::get('create', [AttributesController::class , 'create'])->name('admin.attributes.create');
+                Route::post('store', [AttributesController::class , 'store'])->name('admin.attributes.store');
+                Route::get('edit/{id}', [AttributesController::class , 'edit'])->name('admin.attributes.edit');
+                Route::post('update/{id}', [AttributesController::class , 'update'])->name('admin.attributes.update');
+                Route::get('delete/{id}', [AttributesController::class , 'destroy'])->name('admin.attributes.delete');
+            });
+            ################################## end attributes    #######################################
+            ################################## options ######################################
+            Route::group(['prefix' => 'options'], function () {
+                Route::get('/',  [OptionsController::class , 'index'])->name('admin.options');
+                Route::get('create',  [OptionsController::class , 'create'])->name('admin.options.create');
+                Route::post('store',  [OptionsController::class , 'store'])->name('admin.options.store');
+                Route::get('delete/{id}', [OptionsController::class , 'destroy']) -> name('admin.options.delete');
+                Route::get('edit/{id}',  [OptionsController::class , 'edit'])->name('admin.options.edit');
+                Route::post('update/{id}',  [OptionsController::class , 'update'])->name('admin.options.update');
+            });
+            ################################## end options    #######################################
+
 
 
         
