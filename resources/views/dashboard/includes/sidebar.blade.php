@@ -151,7 +151,7 @@
 
 
             <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
-                                                                                    data-i18n="nav.templates.main"> {{__('admin/sidebar.settings')}}</span></a>
+                     data-i18n="nav.templates.main"> {{__('admin/sidebar.settings')}}</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#"
                            data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.shipping methods')}} </a>
@@ -171,7 +171,7 @@
                     <li><a class="menu-item" href="#"
                            data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.main slider')}} </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{ route('admin.sliders.create') }}"
                                    data-i18n="nav.templates.vert.classic_menu">صور الاسليدر </a>
                             </li>
                         </ul>

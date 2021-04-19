@@ -95,26 +95,26 @@ class Product extends Model
         return $this->hasMany(Image::class, 'product_id');
     }
 
-    // public function hasStock($quantity)
-    // {
-    //     return $this->qty >= $quantity;
-    // }
+    public function hasStock($quantity)
+    {
+        return $this->qty >= $quantity;
+    }
 
-    // public function outOfStock()
-    // {
-    //     return $this->qty === 0;
-    // }
+    public function outOfStock()
+    {
+        return $this->qty === 0;
+    }
 
-    // public function inStock()
-    // {
-    //     return $this->qty >= 1;
-    // }
+    public function inStock()
+    {
+        return $this->qty >= 1;
+    }
 
 
-    // public function getTotal($converted = true)
-    // {
-    //     return $total =  $this->special_price ?? $this -> price;
+    public function getTotal($converted = true)
+    {
+        return $total =  $this->special_price ?? $this -> price;
 
-    // }
+    }
 
 }
