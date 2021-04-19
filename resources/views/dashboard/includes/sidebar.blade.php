@@ -94,10 +94,10 @@
                         class="badge badge badge-success badge-pill float-right mr-2"> </span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href=""
+                    <li class="active"><a class="menu-item" href="{{ route('admin.products') }}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href=""
+                    <li><a class="menu-item" href="{{ route('admin.products.general.create') }}"
                            data-i18n="nav.dash.crypto">أضافة
                             منتج جديد </a>
                     </li>
@@ -110,10 +110,10 @@
                         class="badge badge badge-success badge-pill float-right mr-2"></span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href=""
+                    <li class="active"><a class="menu-item" href="{{ route('admin.attributes') }}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أاضافة
+                    <li><a class="menu-item" href="{{ route('admin.attributes.create') }}" data-i18n="nav.dash.crypto">أاضافة
                             جديدة </a>
                     </li>
                 </ul>
@@ -123,10 +123,10 @@
                     <span class="menu-title" data-i18n="nav.dash.main">قيم الخصائص </span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href=""
+                    <li class="active"><a class="menu-item" href="{{ route('admin.options') }}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أاضافة
+                    <li><a class="menu-item" href="{{ route('admin.options.create') }}" data-i18n="nav.dash.crypto">أاضافة
                             جديدة </a>
                     </li>
                 </ul>
@@ -151,7 +151,7 @@
 
 
             <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
-                                                                                    data-i18n="nav.templates.main"> {{__('admin/sidebar.settings')}}</span></a>
+                     data-i18n="nav.templates.main"> {{__('admin/sidebar.settings')}}</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#"
                            data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.shipping methods')}} </a>
@@ -171,7 +171,7 @@
                     <li><a class="menu-item" href="#"
                            data-i18n="nav.templates.vert.main"> {{__('admin/sidebar.main slider')}} </a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href=""
+                            <li><a class="menu-item" href="{{ route('admin.sliders.create') }}"
                                    data-i18n="nav.templates.vert.classic_menu">صور الاسليدر </a>
                             </li>
                         </ul>

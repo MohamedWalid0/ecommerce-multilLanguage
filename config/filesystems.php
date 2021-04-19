@@ -54,6 +54,28 @@ return [
             'visibility' => 'public',
         ],
 
+        // 'products' => [
+        //     'driver' => 'local',
+        //     'root' => public_path() . '/assets/images/products/' ,
+        //     'url' => env('APP_URL').'/storage',
+        //     'visibility' => 'public',
+        // ],
+        
+        'products' => [
+            'driver' => 'local',
+            'root' => public_path('assets/images/products'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+        'sliders' => [
+            'driver' => 'local',
+            'root' => public_path('assets/images/sliders'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
+
 
         's3' => [
             'driver' => 's3',
