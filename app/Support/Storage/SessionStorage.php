@@ -3,45 +3,46 @@
 namespace App\Support\Storage;
 
 use App\Support\Storage\Contracts\StorageInterface;
+use Illuminate\Support\Facades\Session;
 
-use Session;
+// use Session;
 
 class SessionStorage implements StorageInterface
 {
 	/**
-	 * The bucket beeing used.
+	 * The basket beeing used.
 	 *
 	 * @var String
 	 */
-	protected $bucket;
+	protected $basket;
 
 	/**
-	 * Set the bucket name that should be used.
+	 * Set the basket name that should be used.
 	 *
-	 * @param String $bucket
+	 * @param String $basket
 	 */
-	public function __construct($bucket = 'default')
+	public function __construct($basket = 'default')
 	{
-		if(! Session::has($bucket)) {
-			Session::put($bucket, []);
+		if(! Session::has($basket)) {
+			Session::put($basket, []);
 		}
 
-		$this->bucket = $bucket;
+		$this->basket = $basket;
 	}
 
 	/**
-	 * Put the product inside the bucket.
+	 * Put the product inside the basket.
 	 *
 	 * @param Integer $index
 	 * @param array   $value
 	 */
 	public function set($index, $value)
 	{
-		return Session::put("{$this->bucket}.{$index}", $value);
+		return Session::put("{$this->basket}.{$index}", $value);
 	}
 
     /**
-     * Get the product from the bucket.
+     * Get the product from the basket.
      *
      * @param $index
      *
@@ -53,11 +54,11 @@ class SessionStorage implements StorageInterface
 			return null;
 		}
 
-		return Session::get("{$this->bucket}.{$index}");
+		return Session::get("{$this->basket}.{$index}");
 	}
 
     /**
-     * Check if the product index exists in the bucket.
+     * Check if the product index exists in the basket.
      *
      * @param $index
      *
@@ -65,35 +66,35 @@ class SessionStorage implements StorageInterface
      */
 	public function exists($index)
 	{
-		return Session::has("{$this->bucket}.{$index}");
+		return Session::has("{$this->basket}.{$index}");
 	}
 
 	/**
-	 * Get all products inside the bucket.
+	 * Get all products inside the basket.
 	 *
 	 */
 	public function all()
 	{
-		return Session::get("{$this->bucket}");
+		return Session::get("{$this->basket}");
 	}
 
 	/**
-	 * Remove a product from the bucket.
+	 * Remove a product from the basket.
 	 *
 	 * @param Integer $index
 	 */
 	public function remove($index)
 	{
 		if ($this->exists($index)) {
-			Session::forget("{$this->bucket}.{$index}");
+			Session::forget("{$this->basket}.{$index}");
 		}
 	}
 
 	/**
-	 * Clear the entire bucket.
+	 * Clear the entire basket.
 	 */
 	public function clear()
 	{
-		Session::forget($this->bucket);
+		Session::forget($this->basket);
 	}
 }

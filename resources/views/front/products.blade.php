@@ -275,7 +275,7 @@
 
             $.ajax({
                 type: 'post',
-                url: "{{Route('site.cart.add')}}",
+                url: "{{route('site.cart.add')}}",
                 data: {
                     'product_id': $(this).attr('data-product-id'),
                     'product_slug' : $(this).attr('data-product-slug'),

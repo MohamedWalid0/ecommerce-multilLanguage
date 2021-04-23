@@ -30,15 +30,15 @@ class CartController extends Controller
     public function getIndex()
     {
         $basket = $this -> basket ;
+
         return view('front.cart.index',compact('basket'));
     }
 
 
     public function postAdd(Request $request)
     {
-         $slug =$request -> product_slug ;
-         $product = Product::where('slug', $slug)->firstOrFail();
-
+        $slug = $request -> product_slug ;
+        $product = Product::where('slug', $slug)->firstOrFail();
         try {
             $this->basket->add($product, $request->quantity ?? 1);
         } catch (QuantityExceededException $e) {

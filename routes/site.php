@@ -63,7 +63,7 @@ Route::group([
             Route::group(['prefix' => 'cart'], function () {
 
                 Route::get('/', [CartController::class , 'getIndex' ])->name('site.cart.index');
-                Route::post('/cart/add/{slug?}', [CartController::class , 'postAdd' ])->name('site.cart.add');
+                Route::post('/add/{slug?}', [CartController::class , 'postAdd' ])->name('site.cart.add');
                 Route::post('/update/{slug}', [CartController::class , 'postUpdate' ])->name('site.cart.update');
                 Route::post('/update-all', [CartController::class , 'postUpdateAll' ])->name('site.cart.update-all');
             
