@@ -163,13 +163,16 @@
                                                     <div id="_desktop_productcart_detail">
                                                         <div class="product-add-to-cart in_border">
                                                             <div class="add">
-                                                                <button class="btn btn-primary add-to-cart"
+                                                                <a href="{{ route('site.cart.add') }}">
+                                                                <button class="btn btn-primary add-to-cart" 
                                                                         data-button-action="add-to-cart" type="submit">
-                                                                    <div class="icon-cart">
-                                                                        <i class="shopping-cart"></i>
-                                                                    </div>
-                                                                    <span>Add to cart</span>
-                                                                </button>
+
+                                                                            <div class="icon-cart">
+                                                                                <i class="shopping-cart"></i>
+                                                                            </div>
+                                                                            <span>Add to cart</span>
+                                                                        </button>
+                                                                    </a>
                                                             </div>
 
                                                             <a class="addToWishlist  wishlistProd_22" href="#"

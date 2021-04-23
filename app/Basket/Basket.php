@@ -5,10 +5,9 @@ namespace App\Basket;
 use App\Exceptions\QuantityExceededException;
 use App\Models\Product;
 use App\Support\Storage\Contracts\StorageInterface;
+use Exception;
 
-
-class Basket
-{
+class Basket {
 
 	/**
 	* Instance of StorageInterface.
@@ -30,6 +29,7 @@ class Basket
 	* @param StorageInterface $storage
 	* @param Product          $product
 	*/
+
 	public function __construct(StorageInterface $storage, Product $product)
 	{
 		$this->storage = $storage;
@@ -47,57 +47,65 @@ class Basket
 	public function add(Product $product, $quantity)
 	{
 		if ($this->has($product)) {
-			$quantity = $this->get($product)['quantity'] + $quantity;
+			$quantity = $this->get($product)['qty'] + (int) $quantity ;
+		}
+		
+		try {
+			$this->update($product, $quantity);
+			
+		} catch (\Throwable $th) {
+			return($th) ;
 		}
 
-		$this->update($product, $quantity);
+
 	}
 
-	public function addCoupon(Coupon $coupon)
-	{
-		if (!$this->checkCoupon($coupon)) {
-			return false;
-		}
 
-		$product = $coupon->product;
-		$p = $this->get($product);
+	// public function addCoupon(Coupon $coupon)
+	// {
+	// 	if (!$this->checkCoupon($coupon)) {
+	// 		return false;
+	// 	}
 
-		$this->storage->set($product->id, [
-			'product_id' => (int) $product->id,
-			'quantity' => $p['quantity'],
-			'coupon' => $coupon->id,
-		]);
+	// 	$product = $coupon->product;
+	// 	$p = $this->get($product);
 
-		return true;
-	}
+	// 	$this->storage->set($product->id, [
+	// 		'product_id' => (int) $product->id,
+	// 		'quantity' => $p['quantity'],
+	// 		'coupon' => $coupon->id,
+	// 	]);
 
-	public function checkCoupon(Coupon $coupon)
-	{
-		if (!$this->has($coupon->product)) {
-			return false;
-		}
+	// 	return true;
+	// }
 
-		if (!$coupon->active || !$coupon->isValid() || ($this->get($coupon->product)['quantity'] < $coupon->products_count)) {
-			return false;
-		}
+	// public function checkCoupon(Coupon $coupon)
+	// {
+	// 	if (!$this->has($coupon->product)) {
+	// 		return false;
+	// 	}
 
-		if ($coupon->members()->find(auth()->guard('site')->id())) {
-			return false;
-		}
+	// 	if (!$coupon->active || !$coupon->isValid() || ($this->get($coupon->product)['quantity'] < $coupon->products_count)) {
+	// 		return false;
+	// 	}
 
-		return true;
-	}
+	// 	if ($coupon->members()->find(auth()->guard('site')->id())) {
+	// 		return false;
+	// 	}
 
-	public function checkCouponById($id)
-	{
-		$coupon = Coupon::find($id);
+	// 	return true;
+	// }
 
-		if(!$coupon){
-			return false;
-		}
+	// public function checkCouponById($id)
+	// {
+	// 	$coupon = Coupon::find($id);
 
-		return $this->checkCoupon($coupon);
-	}
+	// 	if(!$coupon){
+	// 		return false;
+	// 	}
+
+	// 	return $this->checkCoupon($coupon);
+	// }
 
 	/**
 	* Update the basket.
@@ -109,7 +117,7 @@ class Basket
 	*/
 	public function update(Product $product, $quantity)
 	{
-		if (! $this->product->find($product->id)->hasStock($quantity)) {
+		if (! $this->product->find($product->id)) {
 			throw new QuantityExceededException;
 		}
 
@@ -119,16 +127,16 @@ class Basket
 			return;
 		}
 
-		if ($this->has($product)) {
-			$coupon = $this->get($product)['coupon'];
-		}else{
-			$coupon = null;
-		}
-
+		// if ($this->has($product->coupon)) {
+		// 	$coupon = $this->get($product)['coupon'];
+		// }else{
+		// 	$coupon = null;
+		// }
+		// dd($product->id) ;
 		$this->storage->set($product->id, [
 			'product_id' => (int) $product->id,
 			'quantity' => (int) $quantity,
-			'coupon' => $coupon,
+			// 'coupon' => $coupon,
 		]);
 	}
 
@@ -159,6 +167,8 @@ class Basket
 	*/
 	public function get(Product $product)
 	{
+		// return $product ;
+
 		return $this->storage->get($product->id);
 	}
 
@@ -186,7 +196,7 @@ class Basket
 
 		foreach ($products as $product) {
 			$product->quantity = $this->get($product)['quantity'];
-			$product->coupon = $this->get($product)['coupon'];
+			// $product->coupon = $this->get($product)['coupon'];
 			$items[] = $product;
 		}
 
